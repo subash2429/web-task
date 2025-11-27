@@ -1,0 +1,45 @@
+@import '../variables';
+@import '../mixins';
+
+.btn {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-speed $transition-ease;
+  border: none;
+  outline: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &-primary {
+    @include button-variant($primary-color, darken($primary-color, 10%));
+  }
+  
+  &-success {
+    @include button-variant($secondary-color, darken($secondary-color, 10%));
+  }
+  
+  &-danger {
+    @include button-variant($danger-color, darken($danger-color, 10%));
+  }
+  
+  &-secondary {
+    @include button-variant($gray, darken($gray, 10%));
+  }
+  
+  &-delete {
+    @include button-variant($danger-color, darken($danger-color, 10%));
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+  
+  &-sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+}

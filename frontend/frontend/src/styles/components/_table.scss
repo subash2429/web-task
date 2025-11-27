@@ -1,0 +1,91 @@
+@import '../variables';
+@import '../mixins';
+
+.inventory-container {
+  @include card;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.table-actions {
+  @include flex-between;
+  margin-bottom: $spacing-md;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: $spacing-lg;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  thead {
+    background-color: $dark-color;
+    color: $white;
+    
+    th {
+      padding: $spacing-md;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: $font-size-sm;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  tbody {
+    tr {
+      border-bottom: 1px solid $light-color;
+      transition: background-color $transition-speed $transition-ease;
+      
+      &:hover {
+        background-color: lighten($light-color, 3%);
+      }
+      
+      td {
+        padding: $spacing-md;
+        
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  tfoot {
+    font-weight: 600;
+    
+    tr {
+      border-top: 2px solid $dark-color;
+      
+      td {
+        padding: $spacing-md;
+      }
+    }
+    
+    .subtotal-row {
+      background-color: lighten($light-color, 5%);
+    }
+    
+    .discount-row {
+      background-color: lighten($warning-color, 35%);
+      color: darken($warning-color, 20%);
+    }
+    
+    .total-row {
+      background-color: $secondary-color;
+      color: $white;
+      font-size: $font-size-lg;
+    }
+  }
+  
+  @include tablet {
+    font-size: $font-size-sm;
+    
+    th, td {
+      padding: $spacing-sm;
+    }
+  }
+}

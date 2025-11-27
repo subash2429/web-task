@@ -1,0 +1,192 @@
+@import '../variables';
+@import '../mixins';
+
+.edit-form-container,
+.add-item-section,
+.coupon-section {
+  @include card;
+  max-width: 1200px;
+  margin: 0 auto $spacing-lg;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+  
+  h2 {
+    color: $dark-color;
+    margin-bottom: $spacing-xs;
+  }
+  
+  p {
+    color: $gray;
+  }
+}
+
+.form-actions-top {
+  @include flex-between;
+  margin-bottom: $spacing-lg;
+  gap: $spacing-sm;
+  
+  @include mobile {
+    @include flex-column;
+    align-items: stretch;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: $spacing-md;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-card {
+  @include card;
+  border: 2px solid $light-color;
+  
+  &:hover {
+    border-color: $primary-color;
+    box-shadow: $shadow-md;
+  }
+}
+
+.form-card-header {
+  @include flex-between;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 2px solid $light-color;
+  
+  h3 {
+    color: $dark-color;
+    margin: 0;
+  }
+}
+
+.form-group {
+  margin-bottom: $spacing-md;
+  
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 600;
+    color: $dark-color;
+    font-size: $font-size-sm;
+  }
+  
+  input {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 2px solid $light-color;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;
+    transition: border-color $transition-speed $transition-ease;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+    
+    &:disabled {
+      background-color: lighten($light-color, 3%);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-sm;
+}
+
+.total-display {
+  .total-value {
+    padding: $spacing-sm;
+    background-color: lighten($secondary-color, 40%);
+    border-radius: $border-radius-sm;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $secondary-color;
+    text-align: center;
+  }
+}
+
+.add-item-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-md;
+  align-items: end;
+  
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+  
+  .total-preview {
+    padding: $spacing-sm;
+    background-color: lighten($primary-color, 40%);
+    border-radius: $border-radius-sm;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $primary-color;
+    text-align: center;
+  }
+}
+
+.coupon-form {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+  
+  .coupon-input {
+    flex: 1;
+    padding: $spacing-sm;
+    border: 2px solid $light-color;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;
+    text-transform: uppercase;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.coupon-hint {
+  padding: $spacing-sm;
+  background-color: lighten($warning-color, 40%);
+  border-left: 4px solid $warning-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+  
+  strong {
+    color: $warning-color;
+  }
+}
+
+.message {
+  padding: $spacing-sm;
+  border-radius: $border-radius-sm;
+  margin-top: $spacing-sm;
+  font-weight: 600;
+  
+  &-success {
+    background-color: lighten($secondary-color, 40%);
+    color: darken($secondary-color, 20%);
+    border-left: 4px solid $secondary-color;
+  }
+  
+  &-error {
+    background-color: lighten($danger-color, 40%);
+    color: darken($danger-color, 10%);
+    border-left: 4px solid $danger-color;
+  }
+}
