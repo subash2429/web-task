@@ -11,9 +11,20 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
+// Allow both localhost (development) and Vercel (production)
+const allowedOrigins = [
+  'http://localhost:5173',                // local frontend
+  'https://your-frontend.vercel.app'      // production Vercel URL
+];
 
 app.use(cors({
-  origin: "https://your-frontend.vercel.app", // replace with your Vercel URL
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -21,18 +32,19 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+// API routes
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/coupons', couponRoutes);
 
-
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date() });
 });
 
-
+// Error handler
 app.use(errorHandler);
 
+// Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
