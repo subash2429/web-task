@@ -41,6 +41,16 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date() });
 });
 
+app.get('/db-test', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT 1 + 1 AS result');
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    res.json({ success: false, error: err.message });
+  }
+});
+
+
 // Error handler
 app.use(errorHandler);
 
