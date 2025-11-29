@@ -11,10 +11,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-
 const allowedOrigins = [
-  'http://localhost:5173',                
-  'https://your-frontend.vercel.app'      
+  'http://localhost:5173',
+  'https://web-task-git-main-subash-rs-projects.vercel.app'
 ];
 
 app.use(cors({
@@ -32,10 +31,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/coupons', couponRoutes);
-
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date() });
@@ -50,11 +47,8 @@ app.get('/db-test', async (req, res) => {
   }
 });
 
-
-// Error handler
 app.use(errorHandler);
 
-// Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
