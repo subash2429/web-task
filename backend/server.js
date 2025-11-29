@@ -11,21 +11,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://web-task-git-main-subash-rs-projects.vercel.app'
-];
-
+// Flexible CORS - allows all Vercel deployments
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    if (!origin) return callback(null, true);
+    if (origin.includes('localhost')) return callback(null, true);
+    if (origin.includes('vercel.app')) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(bodyParser.json());
